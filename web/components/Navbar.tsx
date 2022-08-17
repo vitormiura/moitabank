@@ -5,7 +5,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
-      <nav className="bg-white">
+      <nav className="bg-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
@@ -43,10 +43,10 @@ export default function Navbar() {
             </div>
             <div className="-mr-2 flex">
             <div className="hidden md:block">
-                  <a href="#" className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  <a href="#" className="text-black hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                     Help
                   </a>
-                  <a href="#" className="text-black bg-green-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  <a href="#" className="text-black bg-green-400 hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                     Log In
                   </a>  
                 </div>
@@ -144,7 +144,7 @@ export default function Navbar() {
                 </a>
                 <a
                   href="#"
-                  className="text-black bg-green-300   hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="text-black bg-green-300 hover:bg-emerald-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Log In
                 </a>

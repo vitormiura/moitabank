@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Transition } from "@headlessui/react";
+import Logo from "../public/logo.png"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,7 @@ export default function Navbar() {
                 <div className="flex-shrink-0">
                 <img
                   className="h-12 w-12"
-                  src="../public/logo.png"
+                  src= { Logo }
                   alt="Workflow"
                 />
               </div>

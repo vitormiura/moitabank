@@ -34,11 +34,6 @@ export default function Navbar() {
                     Business
                   </a>
                 </div>
-                {/* <div className="">
-                  <a href="#" className="text-gray-300 hover:bg-gray-700 ml-50 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                    Help
-                  </a> 
-                </div> */}
               </div>
             </div>
             <div className="-mr-2 flex">

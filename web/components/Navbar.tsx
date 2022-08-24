@@ -10,10 +10,10 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-                <div className="flex-shrink-0">
+              <div className="flex-shrink-0">
                 <img
                   className="h-12 w-12"
-                  src= { Logo }
+                  src={Logo}
                   alt="Workflow"
                 />
               </div>
@@ -38,14 +38,14 @@ export default function Navbar() {
               </div>
             </div>
             <div className="-mr-2 flex">
-            <div className="hidden md:block">
-                  <a href="#" className="text-black hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                    Help
-                  </a>
-                  <a href="#" className="text-black bg-green-400 hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                    Log In
-                  </a>  
-                </div>
+              <div className="hidden md:block">
+                <a href="#" className="text-black hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Help
+                </a>
+                <a href="#" className="text-black bg-green-400 hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Log In
+                </a>
+              </div>
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"

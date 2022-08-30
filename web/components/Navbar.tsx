@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Transition } from "@headlessui/react";
 import Logo from "../public/logo.png"
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,11 +12,9 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <img
-                  className="h-12 w-12"
-                  src={Logo}
-                  alt="Workflow"
-                />
+                <Link to="/">
+                  <img className="h-12 w-12" src={Logo} alt="Workflow" />
+                </Link>
               </div>
               <div className="hidden md:block ">
                 <div className="ml-10 flex items-baseline space-x-4">
@@ -39,9 +38,11 @@ export default function Navbar() {
             </div>
             <div className="-mr-2 flex">
               <div className="hidden md:block">
-                <a href="#" className="text-black hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  Help
-                </a>
+                <Link to="/help">
+                  <a href="" className="text-black hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                    Help
+                  </a>
+                </Link>
                 <a href="#" className="text-black bg-green-400 hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Log In
                 </a>
@@ -148,14 +149,14 @@ export default function Navbar() {
             </div>
           )}
         </Transition>
-      </nav>
+      </nav >
 
-      {/* <header className="bg-white shadow">
+  {/* <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
         </div>
       </header> */}
-      {/* <main>
+  {/* <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
     
           <div className="px-4 py-6 sm:px-0">
@@ -164,6 +165,6 @@ export default function Navbar() {
          
         </div>
       </main> */}
-    </div>
+    </div >
   );
 }

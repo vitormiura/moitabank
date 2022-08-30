@@ -1,9 +1,19 @@
 import Index from './pages/index'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 import Help from './pages/help'
 
 function App() {
   return (
-    <Help/>
+    <Router>
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/help" element={<Help />} />
+    </Routes>
+  </Router>
   );
 }
 

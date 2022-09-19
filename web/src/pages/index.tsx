@@ -10,7 +10,7 @@ export default function Index() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="hero min-h-screen">
           <div className="hero-content flex-col lg:flex-row">
-            <div>
+            <div className="text-gray-800">
               <h1 className="text-5xl font-bold">
                 Fast, Secure and Realiable!
               </h1>

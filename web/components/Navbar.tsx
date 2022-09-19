@@ -44,7 +44,7 @@ export default function Navbar() {
                   </a>
                 </Link>
                 <a href="#" className="text-black bg-green-400 hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  Log In
+                  Login
                 </a>
               </div>
               <button
@@ -143,7 +143,7 @@ export default function Navbar() {
                   href="#"
                   className="text-black bg-green-300 hover:bg-emerald-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  Log In
+                  Login
                 </a>
               </div>
             </div>

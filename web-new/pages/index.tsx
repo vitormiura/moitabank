@@ -8,7 +8,7 @@ import Cel from "../public/cel.png";
 const Home: NextPage = () => {
   return (
     <div>
-      <Navbar />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="hero min-h-screen">
           <div className="hero-content flex-col lg:flex-row">
@@ -29,7 +29,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </div>
   );
 }

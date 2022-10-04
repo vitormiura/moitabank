@@ -1,5 +1,6 @@
 from unicodedata import decimal
 from django.db import models
+from django.conf import settings
 
 class Client(models.Model):
     Male = 'M'
@@ -21,6 +22,7 @@ class Client(models.Model):
     is_employed = models.BooleanField()
     gender = models.CharField(max_length=1, choices=Gender, default=Undefined) 
     created_at = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     
     def __str__(self) -> str:
         return self.name

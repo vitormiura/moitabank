@@ -1,4 +1,6 @@
+from secrets import choice
 from unicodedata import decimal
+from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.conf import settings
 
@@ -26,6 +28,21 @@ class Client(models.Model):
     
     def __str__(self) -> str:
         return self.name
+
+class Card(models.Model):
+    BLOCKED = "B"
+    ACTIVE = "A"
+
+    STATE = [
+        (BLOCKED, 'Blocked'),
+        (ACTIVE, 'Active')
+    ]
+
+    number = models.CharField(max_length=20)
+    cvv = models.PositiveSmallIntegerField(max_lenght=3)
+    expiration_date = models.DateField()
+    state = models.CharField(max_lenght=1, choices=STATE)
+    client = models.ForeignKey(Client, on_delete=models.PROTECT)
 
 class Address(models.Model):
     country = models.CharField(max_length=55)
@@ -81,3 +98,29 @@ class Loan(models.Model):
     expiration = models.DateField()
     condition = models.CharField(max_length=1, choices=CONDITION, default=WAITING)
     account = models.ForeignKey(Account, related_name='Loan', on_delete=models.PROTECT)
+
+class Transaction(models.Model):
+    value = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+    recipient = models.ForeignKey(Client, on_delete=models.PROTECT, related_name='recipient')
+    sender = models.ForeignKey(Client, on_delete=models.PROTECT, related_name = 'sender')
+
+class LoanPayment(models.Model):
+    installments = models.PositiveSmallIntegerField(null=1)
+    due_date = models.DateTimeField(auto_now_add=True)
+    payment_date = models.DateTimeField(auto_now_add=True)
+    loan = models.ForeignKey(Loan, on_delete=models.PROTECT)
+
+class BankStatement(models.Model):
+    ENTRIES = "E",
+    WITHDRAWALS = "W"
+
+    CONDITIONS = [
+        (ENTRIES, 'Entries'), 
+        (WITHDRAWALS, 'Withdrawals')
+    ]
+
+    value = models.DecimalField(decimal_places=2)
+    date = models.DateTimeField(auto_now_add=True)
+    type = models.CharField(max_length=1, choices=CONDITIONS)
+    account = models.ForeignKey(Client, on_delete=models.PROTECT)

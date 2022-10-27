@@ -39,9 +39,9 @@ class Card(models.Model):
     ]
 
     number = models.CharField(max_length=20)
-    cvv = models.PositiveSmallIntegerField(max_lenght=3)
+    cvv = models.PositiveSmallIntegerField()
     expiration_date = models.DateField()
-    state = models.CharField(max_lenght=1, choices=STATE)
+    state = models.CharField(max_length=1, choices=STATE)
     client = models.ForeignKey(Client, on_delete=models.PROTECT)
 
 class Address(models.Model):
@@ -112,7 +112,7 @@ class LoanPayment(models.Model):
     loan = models.ForeignKey(Loan, on_delete=models.PROTECT)
 
 class BankStatement(models.Model):
-    ENTRIES = "E",
+    ENTRIES = "E"
     WITHDRAWALS = "W"
 
     CONDITIONS = [
@@ -120,7 +120,7 @@ class BankStatement(models.Model):
         (WITHDRAWALS, 'Withdrawals')
     ]
 
-    value = models.DecimalField(decimal_places=2)
+    value = models.DecimalField(decimal_places=2, max_digits=2)
     date = models.DateTimeField(auto_now_add=True)
     type = models.CharField(max_length=1, choices=CONDITIONS)
     account = models.ForeignKey(Client, on_delete=models.PROTECT)

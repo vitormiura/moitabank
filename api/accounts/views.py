@@ -8,37 +8,33 @@ class Client(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
 
 class Card(viewsets.ModelViewSet):
-    query = Card.objects.all()
+    queryset = Card.objects.all()
     serializer_class = CardSerializer
 
 class Address(viewsets.ModelViewSet):
-    query = Address.objects.all()
+    queryset = Address.objects.all()
     serializer_class = AddressSerializer
 
 class Contacts(viewsets.ModelViewSet):
-    query = Contacts.objects.all()
+    queryset = Contacts.objects.all()
     serializer_class = ContactsSerializer
 
 class Accounts(viewsets.ModelViewSet):
-    query = Account.objects.all()
+    queryset = Account.objects.all()
     serializer_class = AccountSerializer
 
-class Contacts(viewsets.ModelViewSet):
-    query = Contacts.objects.all()
-    serializer_class = ContactsSerializer
-
 class Loan(viewsets.ModelViewSet):
-    query = Loan.objects.all()
+    queryset = Loan.objects.all()
     serializer_class = LoanSerializer
 
 class LoanPayment(viewsets.ModelViewSet):
-    query = LoanPayment.objects.all()
+    queryset = LoanPayment.objects.all()
     serializer_class = LoanPaySerializer
 
 class Transaction(viewsets.ModelViewSet):
-    query = Transaction.objects.all()
+    queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
 
 class BankStatement(viewsets.ModelViewSet):
-    query = BankStatement.objects.all()
+    queryset = BankStatement.objects.all()
     serializer_class = BankStateSerializer

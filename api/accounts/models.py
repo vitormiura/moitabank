@@ -39,7 +39,7 @@ class Card(models.Model):
     ]
 
     number = models.CharField(max_length=20)
-    cvv = models.PositiveSmallIntegerField()
+    cvv = models.PositiveSmallIntegerField(max_length=3)
     expiration_date = models.DateField()
     state = models.CharField(max_length=1, choices=STATE)
     client = models.ForeignKey(Client, on_delete=models.PROTECT)

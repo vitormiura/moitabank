@@ -1,6 +1,6 @@
 import Logo from "../public/logo.png";
 import Image from "next/image";
-import Head from 'next/head'
+import Head from "next/head";
 
 export default function Footer() {
   return (

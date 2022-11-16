@@ -49,7 +49,7 @@ env
 
 # Developers
 *.sw*
-manage.py
+# manage.py
 .DS_Store
 
 # example database

@@ -52,6 +52,7 @@ export default function Navbar() {
                 <a
                   href="#"
                   className="text-black bg-green-400 hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  onClick={() => router.push("/login")}
                 >
                   Login
                 </a>

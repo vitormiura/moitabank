@@ -1,12 +1,23 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
 import Cel from "../public/cel.png";
 
 const Home: NextPage = () => {
   return (
     <div>
-      
+      <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+      <label htmlFor="my-modal-4" className="modal cursor-pointer">
+        <label className="modal-box relative" htmlFor="">
+          <h3 className="text-lg font-bold">
+            Congratulations random Internet user!
+          </h3>
+          <p className="py-4">
+            bololo haha
+          </p>
+        </label>
+      </label>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="hero min-h-screen">
           <div className="hero-content flex-col lg:flex-row">
@@ -20,16 +31,16 @@ const Home: NextPage = () => {
                 cupiditate ab deserunt! Odit, accusamus ipsum adipisci mollitia
                 quam optio modi ut illo. Cumque.
               </p>
-              <button className="btn btn-primary">Lorem ipsum</button>
+              <label htmlFor="my-modal-4" className="btn btn-primary">
+                open modal
+              </label>
             </div>
-
             <Image src={Cel} className="lg:max-w-2xl" />
           </div>
         </div>
       </div>
-      
     </div>
   );
-}
+};
 
-export default Home
+export default Home;

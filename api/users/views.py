@@ -10,12 +10,3 @@ class RegisterView(APIView):
         serializer.save()
         return Response(serializer.data)       
 
-    def create(self, validated_data):
-        password = validated_data.pop('password', None)
-        instance = self.Meta.Model(**validated_data)
-        
-        if password is not None:
-            instance.set_password(password)
-        instance.save()
-        
-        return instance

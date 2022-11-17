@@ -5,8 +5,8 @@ const Login: NextPage = () => {
   return (
     <>
       <section className="h-full gradient-form bg-gray-200 md:h-screen">
-        <div className="container py-12 px-6 h-full">
-          <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+        <div className="container py-12 px-6 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800 max-w-7x1 mx-auto">
             <div className="xl:w-10/12">
               <div className="block bg-white shadow-lg rounded-lg">
                 <div className="lg:flex lg:flex-wrap g-0">

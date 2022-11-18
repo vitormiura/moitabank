@@ -14,23 +14,23 @@ export default function Register() {
           >
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
+              id="name"
               type="text"
               placeholder="name"
             />
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
+              id="cpf"
               type="text"
               placeholder="cpf"
             />
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
+              id="password"
               type="text"
               placeholder="password"
             />
-            <input type="submit" value="Submit" />
+            <button className="btn btn-active">Signup!</button>
           </form>
         </label>
       </label>

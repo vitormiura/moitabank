@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import Cel from "../public/cel.png";
-import Register from '../components/RegiterModal'
+import Cel from "../public/13mockup.png";
+import Register from '../components/RegisterModal'
 
 const Home: NextPage = () => {
   return (

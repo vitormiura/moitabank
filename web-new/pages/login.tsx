@@ -55,13 +55,13 @@ const Login: NextPage = () => {
                         </div>
                       </form>
                       <div className="flex items-center justify-between pb-6">
-                        <p className="mb-0 mr-2">Don't have an account?</p>
+                        <p className="mb-0 mr-2">Not a customer yet?</p>
                         <Register />
                       </div>
                     </div>
                   </div>
                   <div className="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none">
-                    <Image src={muie} />
+                    <Image src={muie} alt="woman using phone" />
                   </div>
                 </div>
               </div>

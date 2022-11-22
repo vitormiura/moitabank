@@ -134,7 +134,7 @@ export default function Navbar() {
                 <button className="text-black hover:bg-emerald-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
                   Help
                 </button>
-                <button className="text-black bg-green-300 hover:bg-emerald-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                <button className="text-black bg-green-300 hover:bg-emerald-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onClick={() => router.push("/login")}>
                   Login
                 </button>
               </div>

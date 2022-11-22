@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { NextPage } from "next";
+import { Formik, Field, Form } from "formik";
 import Image from "next/image";
 import Logo from "../public/logo.png";
 import Register from "../components/RegisterModal";
@@ -23,37 +24,44 @@ const Login: NextPage = () => {
                         </h4>
                       </div>
                       <p className="mb-4">Please login to your account</p>
-                      <form>
-                        <div className="mb-4">
-                          <input
-                            type="text"
-                            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            id="exampleFormControlInputCPF"
-                            placeholder="CPF"
-                          />
-                        </div>
-                        <div className="mb-4">
-                          <input
-                            type="password"
-                            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            id="exampleFormControlInputPassword"
-                            placeholder="Password"
-                          />
-                        </div>
-                        <div className="text-center pt-1 mb-12 pb-1">
-                          <button
-                            className="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3 bg-green-600"
-                            type="button"
-                            data-mdb-ripple="true"
-                            data-mdb-ripple-color="light"
-                          >
-                            Log in
-                          </button>
-                          <a className="text-gray-500" href="#!">
-                            Forgot password?
-                          </a>
-                        </div>
-                      </form>
+                      <Formik
+                        initialValues={{ cpf: "", password: "" }}
+                        onSubmit={(values) => {
+                          console.log(values);
+                        }}
+                      >
+                        <Form>
+                          <div className="mb-4">
+                            <Field
+                              type="text"
+                              name="cpf"
+                              className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                              placeholder="CPF"
+                            />
+                          </div>
+                          <div className="mb-4">
+                            <Field
+                              name="password"
+                              type="password"
+                              className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                              placeholder="Password"
+                            />
+                          </div>
+                          <div className="text-center pt-1 mb-12 pb-1">
+                            <button
+                              className="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3 bg-green-600"
+                              type="submit"
+                              data-mdb-ripple="true"
+                              data-mdb-ripple-color="light"
+                            >
+                              Log in
+                            </button>
+                            <a className="text-gray-500" href="#!">
+                              Forgot password?
+                            </a>
+                          </div>
+                        </Form>
+                      </Formik>
                       <div className="flex items-center justify-between pb-6">
                         <p className="mb-0 mr-2">Not a customer yet?</p>
                         <Register />

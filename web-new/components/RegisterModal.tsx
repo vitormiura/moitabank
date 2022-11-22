@@ -1,6 +1,23 @@
 import { Formik, Field, Form } from "formik";
+import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+
+const api = axios.create({
+  baseURL: "http://localhost:8000/auth/",
+});
+
+const register = async ({ cpf, password, name, email }: any) => {
+  try {
+    const { data } = await api.post("/register", { cpf, password });
+    return data;
+  } catch (error: any) {
+    throw Error(error.response.data.message);
+  }
+};
 
 export default function Register() {
+  const { isLoading, error, isError, mutateAsync, data } =
+    useMutation(register);
   return (
     <>
       <label htmlFor="my-modal-4" className="btn btn-primary">
@@ -11,9 +28,14 @@ export default function Register() {
         <label className="modal-box relative" htmlFor="">
           <h3 className="text-lg font-bold">bololo haha</h3>
           <Formik
-            initialValues={{ name: "", cpf: "", password: "" }}
-            onSubmit={(values) => {
-              console.log(values);
+            initialValues={{ name: "", cpf: "", password: "", email: "" }}
+            onSubmit={async (values: any) => {
+              await mutateAsync({
+                name: values.name,
+                cpf: values.cpf,
+                email: values.email,
+                password: values.password,
+              });
             }}
           >
             <Form
@@ -34,11 +56,19 @@ export default function Register() {
               />
               <Field
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                name="email"
+                type="email"
+                placeholder="email"
+              />
+              <Field
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="password"
                 type="text"
                 placeholder="password"
               />
-              <button className="btn btn-active" type="submit">Signup!</button>
+              <button className="btn btn-active" type="submit">
+                Signup!
+              </button>
             </Form>
           </Formik>
         </label>

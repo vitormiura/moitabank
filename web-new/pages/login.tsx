@@ -9,24 +9,22 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
 type Props = {
-  cpf: string,
-  password: string
-}
+  cpf: string;
+  password: string;
+};
 
 const api = axios.create({
   baseURL: "http://localhost:8000/auth/",
 });
 
-
 const login = async ({ cpf, password }: any) => {
-try {
-  const { data } = await api.post("/login", { cpf, password });
-  return data;
-} catch (error: any) {
-  throw Error(error.response.data.message);
-}
+  try {
+    const { data } = await api.post("/login", { cpf, password });
+    return data;
+  } catch (error: any) {
+    throw Error(error.response.data.message);
+  }
 };
-
 
 const Login: NextPage = () => {
   const { isLoading, error, isError, mutateAsync, data } = useMutation(login);

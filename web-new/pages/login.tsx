@@ -5,8 +5,35 @@ import Image from "next/image";
 import Logo from "../public/logo.png";
 import Register from "../components/RegisterModal";
 import muie from "../public/womanCell.jpg";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+
+type Props = {
+  cpf: string,
+  password: string
+}
+
+const api = axios.create({
+  baseURL: "http://localhost:8000/auth/",
+});
+
+
+const login = async ({ cpf, password }: any) => {
+try {
+  const { data } = await api.post("/login", { cpf, password });
+  return data;
+} catch (error: any) {
+  throw Error(error.response.data.message);
+}
+};
+
 
 const Login: NextPage = () => {
+  const { isLoading, error, isError, mutateAsync, data } = useMutation(login);
+
+  console.log("data", data);
+  console.log(error);
+
   return (
     <>
       <section className="h-full gradient-form bg-gray-200 md:h-screen">
@@ -26,8 +53,11 @@ const Login: NextPage = () => {
                       <p className="mb-4">Please login to your account</p>
                       <Formik
                         initialValues={{ cpf: "", password: "" }}
-                        onSubmit={(values) => {
-                          console.log(values);
+                        onSubmit={async (values: Props) => {
+                          await mutateAsync({
+                            cpf: values.cpf,
+                            password: values.password,
+                          });
                         }}
                       >
                         <Form>

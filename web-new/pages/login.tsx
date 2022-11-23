@@ -7,6 +7,7 @@ import Register from "../components/RegisterModal";
 import muie from "../public/womanCell.jpg";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { actionTypes, useStateValue } from "../reducer";
 
 type Props = {
   cpf: string;
@@ -27,12 +28,19 @@ const login = async ({ cpf, password }: any) => {
 };
 
 const Login: NextPage = () => {
-  const { isLoading, error, isError, mutateAsync, data } = useMutation(login);
+  const[{}, dispatch] = useStateValue()
+
+  const { isLoading, error, isError, mutateAsync, data } = useMutation(login, {
+    onSuccess: (data) => {
+      console.log(data);
+      dispatch({ type: actionTypes.SET_TOKEN, value: data.token });
+    },
+  });
 
   console.log("data", data);
-  
-  if(isError){
-    console.log('err login')
+
+  if (isError) {
+    console.log("err login");
   }
 
   return (

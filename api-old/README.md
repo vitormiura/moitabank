@@ -1,2 +1,0 @@
-# Moitabank api
-

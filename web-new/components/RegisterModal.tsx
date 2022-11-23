@@ -3,12 +3,12 @@ import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/auth/",
+  baseURL: "http://localhost:8000",
 });
 
-const register = async ({ cpf, password, name, email }: any) => {
+const register = async ({ name, cpf, email, password }: any) => {
   try {
-    const { data } = await api.post("/register", { cpf, password });
+    const { data } = await api.post("/auth/register", { name, cpf, email, password });
     return data;
   } catch (error: any) {
     throw Error(error.response.data.message);
@@ -18,6 +18,10 @@ const register = async ({ cpf, password, name, email }: any) => {
 export default function Register() {
   const { isLoading, error, isError, mutateAsync, data } =
     useMutation(register);
+
+  if(isError){
+    console.log('err')
+  }
   return (
     <>
       <label htmlFor="my-modal-4" className="btn btn-primary">
@@ -28,7 +32,7 @@ export default function Register() {
         <label className="modal-box relative" htmlFor="">
           <h3 className="text-lg font-bold">bololo haha</h3>
           <Formik
-            initialValues={{ name: "", cpf: "", password: "", email: "" }}
+            initialValues={{ name: "", cpf: "", email: "", password: "" }}
             onSubmit={async (values: any) => {
               await mutateAsync({
                 name: values.name,

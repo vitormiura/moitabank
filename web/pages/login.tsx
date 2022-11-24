@@ -1,12 +1,33 @@
-import Head from "next/head";
 import { NextPage } from "next";
 import Image from "next/image";
 import Logo from "../public/logo.png";
 import Register from "../components/RegisterModal";
 import muie from "../public/womanCell.jpg";
 import Layout from "../layouts/Layout";
+import { SyntheticEvent, useState } from "react";
+import { useRouter } from "next/router";
 
 const Login: NextPage = () => {
+  const router = useRouter();
+
+  const [cpf, setCpf] = useState("");
+  const [password, setPassword] = useState("");
+
+  const submit = async (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    await fetch("http://localhost:8000/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        cpf,
+        password,
+      }),
+    });
+    await router.push("/");
+  };
+
   return (
     <>
       <Layout>
@@ -29,13 +50,14 @@ const Login: NextPage = () => {
                           </h4>
                         </div>
                         <p className="mb-4">Please login to your account</p>
-                        <form>
+                        <form onSubmit={submit}>
                           <div className="mb-4">
                             <input
                               type="text"
                               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                               id="exampleFormControlInputCPF"
                               placeholder="CPF"
+                              onChange={(e) => setCpf(e.target.value)}
                             />
                           </div>
                           <div className="mb-4">
@@ -44,12 +66,13 @@ const Login: NextPage = () => {
                               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                               id="exampleFormControlInputPassword"
                               placeholder="Password"
+                              onChange={(e) => setPassword(e.target.value)}
                             />
                           </div>
                           <div className="text-center pt-1 mb-12 pb-1">
                             <button
                               className="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3 bg-green-600"
-                              type="button"
+                              type="submit"
                               data-mdb-ripple="true"
                               data-mdb-ripple-color="light"
                             >

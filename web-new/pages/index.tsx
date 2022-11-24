@@ -1,12 +1,13 @@
 import type { NextPage } from "next";
-import Head from "next/head";
+
 import Image from "next/image";
 import Cel from "../public/13mockup.png";
 import Register from '../components/RegisterModal'
+import Layout from "../layouts/Layout";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <Layout>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="hero min-h-screen">
           <div className="hero-content flex-col lg:flex-row">
@@ -26,7 +27,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

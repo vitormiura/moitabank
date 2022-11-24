@@ -25,7 +25,7 @@ const Login: NextPage = () => {
         password,
       }),
     });
-    await router.push("/");
+    await router.push("/client");
   };
 
   return (

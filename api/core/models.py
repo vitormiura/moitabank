@@ -11,7 +11,7 @@ class Client(models.Model):
     is_active = models.BooleanField()
     birth_date = models.DateField()
     cnpj = models.CharField(max_length=18)
-    is_employed = models.BooleanField()
+    job = models.CharField(max_length=50, null=False)
     gender = models.CharField(max_length=1, choices=Gender, default=Undefined)
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.OneToOneField('users.User', on_delete=models.CASCADE)

@@ -5,6 +5,7 @@ import { Transition } from "@headlessui/react";
 import Logo from "../public/logo.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Footer from "../components/Footer";
 
 
 const Layout = (props: any) => {
@@ -315,6 +316,7 @@ const Layout = (props: any) => {
       </Head>
       {bar}
       <main>{props.children}</main>
+      <Footer/>
     </>
   );
 };

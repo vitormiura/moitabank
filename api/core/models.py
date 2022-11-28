@@ -1,24 +1,6 @@
 from django.db import models
 import users
 
-class Client(models.Model):
-    Male = "M"
-    Female = "F"
-    Undefined = "U"
-
-    Gender = [(Male, "Male"), (Female, "Female"), (Undefined, "Undefined")]
-
-    is_active = models.BooleanField()
-    birth_date = models.DateField()
-    cnpj = models.CharField(max_length=18)
-    job = models.CharField(max_length=50, null=False)
-    gender = models.CharField(max_length=1, choices=Gender, default=Undefined)
-    created_at = models.DateTimeField(auto_now_add=True)
-    user = models.OneToOneField('users.User', on_delete=models.CASCADE)
-
-    def __str__(self) -> str:
-        return self.name
-
 
 class Card(models.Model):
     BLOCKED = "B"
@@ -30,7 +12,7 @@ class Card(models.Model):
     cvv = models.SmallIntegerField(max_length=3, null=False)
     expiration_date = models.DateField()
     state = models.CharField(max_length=1, choices=STATE)
-    client = models.ForeignKey(Client, on_delete=models.PROTECT)
+    client = models.ForeignKey('users.User', on_delete=models.PROTECT)
 
 
 class Address(models.Model):
@@ -42,13 +24,13 @@ class Address(models.Model):
     number = models.PositiveSmallIntegerField()
     complement = models.CharField(max_length=55)
     zip_code = models.CharField(max_length=30)
-    client = models.ForeignKey(Client, on_delete=models.PROTECT)
+    client = models.ForeignKey('users.User', on_delete=models.PROTECT)
 
 
 class Contacts(models.Model):
     telephone = models.CharField(max_length=15)
     email = models.EmailField()
-    client = models.ForeignKey(Client, on_delete=models.PROTECT)
+    client = models.ForeignKey('users.User', on_delete=models.PROTECT)
 
 
 class Account(models.Model):
@@ -67,7 +49,7 @@ class Account(models.Model):
     number = models.PositiveIntegerField()
     agency = models.PositiveIntegerField()
     type = models.CharField(max_length=1, choices=ACCOUNT_TYPE)
-    client = models.ForeignKey(Client, on_delete=models.PROTECT)
+    client = models.ForeignKey('users.User', on_delete=models.PROTECT)
 
 
 class Loan(models.Model):
@@ -96,9 +78,9 @@ class Transaction(models.Model):
     value = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     recipient = models.ForeignKey(
-        Client, on_delete=models.PROTECT, related_name="recipient"
+        'users.User', on_delete=models.PROTECT, related_name="recipient"
     )
-    sender = models.ForeignKey(Client, on_delete=models.PROTECT, related_name="sender")
+    sender = models.ForeignKey('users.User', on_delete=models.PROTECT, related_name="sender")
 
 
 class LoanPayment(models.Model):
@@ -117,4 +99,4 @@ class BankStatement(models.Model):
     value = models.DecimalField(decimal_places=2, max_digits=2)
     date = models.DateTimeField(auto_now_add=True)
     type = models.CharField(max_length=1, choices=CONDITIONS)
-    account = models.ForeignKey(Client, on_delete=models.PROTECT)
+    account = models.ForeignKey('users.User', on_delete=models.PROTECT)

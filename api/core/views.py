@@ -1,11 +1,7 @@
 
 from rest_framework import viewsets
-from .models import Client, Card, Address, Contacts, Account, Loan, Transaction, BankStatement, LoanPayment
-from .serializers import ClientSerializer, CardSerializer, AddressSerializer, ContactsSerializer, AccountSerializer, LoanPaySerializer, LoanSerializer, TransactionSerializer, BankStateSerializer
-
-class Client(viewsets.ModelViewSet):
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
+from .models import Card, Address, Contacts, Account, Loan, Transaction, BankStatement, LoanPayment
+from .serializers import CardSerializer, AddressSerializer, ContactsSerializer, AccountSerializer, LoanPaySerializer, LoanSerializer, TransactionSerializer, BankStateSerializer
 
 class Card(viewsets.ModelViewSet):
     queryset = Card.objects.all()

@@ -1,17 +1,16 @@
 from django.db import models
 import users
 
-
 class Card(models.Model):
     BLOCKED = "B"
     ACTIVE = "A"
 
     STATE = [(BLOCKED, "Blocked"), (ACTIVE, "Active")]
 
-    number = models.CharField(max_length=20, null=False)
-    cvv = models.SmallIntegerField(max_length=3, null=False)
-    expiration_date = models.DateField()
-    state = models.CharField(max_length=1, choices=STATE)
+    number = models.CharField(max_length=20)
+    cvv = models.CharField(max_length=3)
+    expiration_date = models.CharField(max_length=5)
+    state = models.CharField(max_length=1, choices=STATE, default=ACTIVE)
     client = models.ForeignKey('users.User', on_delete=models.PROTECT)
 
 
@@ -21,7 +20,7 @@ class Address(models.Model):
     city = models.CharField(max_length=55)
     disctrict = models.CharField(max_length=55)
     street = models.CharField(max_length=55)
-    number = models.PositiveSmallIntegerField()
+    number = models.PositiveSmallIntegerField() 
     complement = models.CharField(max_length=55)
     zip_code = models.CharField(max_length=30)
     client = models.ForeignKey('users.User', on_delete=models.PROTECT)

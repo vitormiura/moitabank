@@ -3,12 +3,29 @@ import Navbar from "../components/Navbar";
 import Head from "next/head";
 import type { NextPage } from "next";
 import Layout from "../layouts/Layout";
-
+import { useEffect, useState } from "react";
 
 const Help: NextPage = () => {
+  const [auth, setAuth] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch("http://localhost:8000/auth/user", {
+          credentials: "include",
+          method: "GET",
+        });
+        const content = await response.json();
+        setAuth(true);
+      } catch (e) {
+        setAuth(false);
+      }
+    })();
+  }, []);
+  
   return (
     <>
-      <Layout>
+      <Layout auth = {auth}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-screen">
           <section className="text-gray-800">
             <div className="container flex flex-col justify-center p-4 mx-auto md:p-8">

@@ -1,16 +1,12 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import Layout from "../layouts/Layout";
+import { useRouter } from "next/router";
 
 export default function Client() {
-  const [auth, setAuth] = useState(false);
-  const [date, setDate] = useState('')
-  const [active, setActive] = useState(true)
-  const [cnpj, setCnpj] = useState('Null')
-  const [job, setJob] = useState('')
-  const [gender, setGender] = useState('U') 
-  // const [sess, setSess] = useState('')
+  const router = useRouter();
 
-  let usr = ''
+  const [auth, setAuth] = useState(false);
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -19,74 +15,48 @@ export default function Client() {
           credentials: "include",
           method: "GET",
         });
-        const content = await response.json();
-        usr = content.id
+        const user = await response.json();
+        setUser(user.name);
         setAuth(true);
+        if (user.detail == "Unauthenticated!") {
+          setAuth(false);
+          setTimeout(async() => {
+            await router.push("/login");
+          }, 5000)
+          return (<div><input type="checkbox" id="my-modal-4" className="modal-toggle" />
+          <label htmlFor="my-modal-4" className="modal cursor-pointer">
+            <label className="modal-box relative" htmlFor="">
+              <h3 className="text-lg font-bold">Congratulations random Internet user!</h3>
+              <p className="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+            </label>
+          </label>
+          </div>)
+  
+        }
       } catch (e) {
         setAuth(false);
+        console.log(e);
       }
     })();
-  });
-  
-  const submit = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    await fetch("http://localhost:8000/bank/client/", {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        is_active: active,
-        birth_date: date,
-        cnpj: cnpj,
-        job: job,
-        gender: gender,
-        user: usr
-      }),
-    });
-    // await router.push("/login");
-  };
+  }, []);
 
   return (
     <>
-      <Layout auth = {auth}>
+      <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+      <label htmlFor="my-modal-4" className="modal cursor-pointer">
+        <label className="modal-box relative" htmlFor="">
+          <h3 className="text-lg font-bold">
+            Congratulations random Internet user!
+          </h3>
+          <p className="py-4">
+            You've been selected for a chance to get one year of subscription to
+            use Wikipedia for free!
+          </p>
+        </label>
+      </label>
+      <Layout auth={auth}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-screen">
-          <h3 className="text-lg font-bold">pls complete your regitration!</h3>
-          <form
-            onSubmit={submit}
-            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-          >
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="name"
-              type="text"
-              placeholder="birth date"
-              onChange={(e) => setDate(e.target.value)}
-            />
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="cpf"
-              type="text"
-              placeholder="cnpj"
-              onChange={(e) => setCnpj(e.target.value)}
-            />
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="text"
-              placeholder="job"
-              onChange={(e) => setJob(e.target.value)}
-            />
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="text"
-              placeholder="gender"
-              onChange={(e) => setGender(e.target.value)}
-            />
-            <button className="btn btn-active" type="submit">
-              Signup!
-            </button>
-          </form>
+          <h3 className="text-lg font-bold">Welcome {user}!</h3>
         </div>
       </Layout>
     </>

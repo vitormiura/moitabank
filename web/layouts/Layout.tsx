@@ -177,25 +177,17 @@ const Layout = (props: any) => {
                     className="h-12 w-12"
                     src={Logo}
                     alt="Workflow"
-                    onClick={() => router.push("/")}
+                    onClick={() => router.push("/client")}
                   />
                 </div>
                 <div className="hidden md:block ">
                   <div className="ml-10 flex items-baseline space-x-4">
                     <button className=" hover:bg-emerald-700 hover:text-white text-black px-3 py-2 rounded-md text-sm font-medium">
-                      Cards
+                      My account
                     </button>
 
                     <button className="text-black hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                      Banking
-                    </button>
-
-                    <button className="text-black hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                      Rewards & Beneficts
-                    </button>
-
-                    <button className="text-black hover:bg-emerald-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                      Business
+                      Transfer
                     </button>
                   </div>
                 </div>
@@ -275,19 +267,11 @@ const Layout = (props: any) => {
               <div className="md:hidden" id="mobile-menu">
                 <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                   <button className="hover:bg-gray-700 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                    Cards
+                    My account
                   </button>
 
                   <button className="text-black hover:bg-emerald-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                    Banking
-                  </button>
-
-                  <button className="text-black hover:bg-emerald-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                    Rewards & Beneficts
-                  </button>
-
-                  <button className="text-black hover:bg-emerald-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                    Business
+                    Transfer
                   </button>
 
                   <button className="text-black hover:bg-emerald-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">

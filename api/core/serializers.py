@@ -1,10 +1,27 @@
 from rest_framework import serializers
+from random import randint
 from .models import Account, Card, Address, Contacts, Account, Loan, Transaction, BankStatement, LoanPayment
 
 class CardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Card
         fields = ('__all__')
+    
+    number = serializers.SerializerMethodField(method_name='cardNumber')
+    cvv = serializers.SerializerMethodField(method_name='randCvv')
+    expiration_date = serializers.SerializerMethodField(method_name='randExp')
+
+    def randCvv(self, Card): 
+        rand = f"{randint(100,999)}"
+        return rand
+
+    def randExp(self, Card):
+        rand = f"{randint(1,12)}/{randint(27,32)}" 
+        return rand
+
+    def cardNumber(self, Card):
+        rand = f"{randint(1000,9999)} {randint(1000,9999)} {randint(1000,9999)} {randint(1000,9999)}"
+        return rand
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:

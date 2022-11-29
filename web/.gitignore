@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# bosch env
+/package-lock.json
+
 # testing
 /coverage
 

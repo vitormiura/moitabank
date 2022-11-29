@@ -43,10 +43,9 @@ class Account(models.Model):
         (WAGE, "Wage Account"),
     ]
 
-    balance = models.DecimalField(decimal_places=2, null=0, max_digits=2)
-    salary = models.DecimalField(decimal_places=2, max_digits=2)
-    number = models.PositiveIntegerField()
-    agency = models.PositiveIntegerField()
+    balance = models.DecimalField(decimal_places=2, null=0, max_digits=10)
+    number = models.CharField(max_length=7)
+    agency = models.CharField(max_length=4)
     type = models.CharField(max_length=1, choices=ACCOUNT_TYPE)
     client = models.ForeignKey('users.User', on_delete=models.PROTECT)
 
@@ -77,9 +76,9 @@ class Transaction(models.Model):
     value = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     recipient = models.ForeignKey(
-        'users.User', on_delete=models.PROTECT, related_name="recipient"
+        Account, on_delete=models.PROTECT, related_name="recipient"
     )
-    sender = models.ForeignKey('users.User', on_delete=models.PROTECT, related_name="sender")
+    sender = models.ForeignKey(Account, on_delete=models.PROTECT, related_name="sender")
 
 
 class LoanPayment(models.Model):

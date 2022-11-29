@@ -11,16 +11,31 @@ class CardSerializer(serializers.ModelSerializer):
     cvv = serializers.SerializerMethodField(method_name='randCvv')
     expiration_date = serializers.SerializerMethodField(method_name='randExp')
 
-    def randCvv(self, Card): 
+    def randCvv(self, rand): 
         rand = f"{randint(100,999)}"
         return rand
 
-    def randExp(self, Card):
+    def randExp(self, rand):
         rand = f"{randint(1,12)}/{randint(27,32)}" 
         return rand
 
-    def cardNumber(self, Card):
+    def cardNumber(self, rand):
         rand = f"{randint(1000,9999)} {randint(1000,9999)} {randint(1000,9999)} {randint(1000,9999)}"
+        return rand
+
+class AccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ('__all__')
+
+    number = serializers.SerializerMethodField(method_name='randNumber')
+    agency = serializers.SerializerMethodField(method_name='randAgency')
+
+    def randNumber(self, rand):
+        rand = f"{randint(10000,99999)}-{randint(0,9)}" 
+        return rand
+    def randAgency(self, rand):
+        rand = f"{randint(4000,9999)}" 
         return rand
 
 class AddressSerializer(serializers.ModelSerializer):
@@ -33,10 +48,6 @@ class ContactsSerializer(serializers.ModelSerializer):
         model = Contacts
         fields = ('__all__')
 
-class AccountSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Account
-        fields = ('__all__')
 
 class LoanSerializer(serializers.ModelSerializer):
     class Meta:
@@ -52,6 +63,8 @@ class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = ('__all__')
+
+    
 
 class BankStateSerializer(serializers.ModelSerializer):
     class Meta:

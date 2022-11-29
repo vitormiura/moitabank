@@ -1,5 +1,7 @@
 
-from rest_framework import viewsets
+import decimal
+from rest_framework import viewsets, status
+from rest_framework.response import Response
 from .models import Card, Address, Contacts, Account, Loan, Transaction, BankStatement, LoanPayment
 from .serializers import CardSerializer, AddressSerializer, ContactsSerializer, AccountSerializer, LoanPaySerializer, LoanSerializer, TransactionSerializer, BankStateSerializer
 
@@ -30,6 +32,31 @@ class LoanPayment(viewsets.ModelViewSet):
 class Transaction(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
+
+    def create(self, request, *args, **kwargs):
+        recipiente = Account.objects.get(pk = self.request.data['recipient'])
+        sender = Account.objects.get(pk = self.request.data['sender'])
+
+        recipiente.balance -= decimal.Decimal(self.request.data['value'])
+        sender.balance += decimal.Decimal(self.request.data['value'])
+
+        updateRecipient = {'balance':recipiente.balance, 'type':recipiente.type, 'number':recipiente.number,'agency':recipiente.agency,'client': recipiente.client.pk}
+
+        updateSender = {'balance':sender.balance,'type':sender.type, 'number':sender.number,'agency':sender.agency,'client': sender.client.pk}
+
+        serializerSender = AccountSerializer(sender, data = updateSender)
+        serializerRecipient = AccountSerializer(recipiente, data = updateRecipient)
+
+        if serializerSender.is_valid() and serializerRecipient.is_valid():
+            serializerSender.save()
+            serializerRecipient.save()
+            return super().create(request, *args, **kwargs)
+        else:
+            print(serializerSender.errors)
+            print(sender.client)
+            return Response(status=status.HTTP_200_OK)
+            
+        
 
 class BankStatement(viewsets.ModelViewSet):
     queryset = BankStatement.objects.all()

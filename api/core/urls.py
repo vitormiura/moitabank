@@ -8,6 +8,7 @@ router.register('card', views.Card, basename='card')
 router.register('address', views.Address, basename='address')
 router.register('contacts', views.Contacts, basename='contacts')
 router.register('accounts', views.Accounts, basename='accounts')
+router.register('trans', views.Transaction, basename='transaction')
 router.register('loan', views.Loan, basename='loan')
 router.register('lopayment', views.LoanPayment, basename='loanpayment')
 

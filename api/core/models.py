@@ -13,6 +13,7 @@ class Card(models.Model):
     expiration_date = models.CharField(max_length=5)
     state = models.CharField(max_length=1, choices=STATE, default=ACTIVE)
     client = models.ForeignKey('users.User', on_delete=models.PROTECT)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
         self.number = f"{randint(1000,9999)} {randint(1000,9999)} {randint(1000,9999)} {randint(1000,9999)}"
@@ -39,24 +40,15 @@ class Contacts(models.Model):
     telephone = models.CharField(max_length=15)
     email = models.EmailField()
     client = models.ForeignKey('users.User', on_delete=models.PROTECT)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Account(models.Model):
-    CHECKING = "C"
-    SAVING = "S"
-    WAGE = "W"
-
-    ACCOUNT_TYPE = [
-        (CHECKING, "Checking Account"),
-        (SAVING, "Saving Account"),
-        (WAGE, "Wage Account"),
-    ]
-
     balance = models.DecimalField(decimal_places=2, null=0, max_digits=10)
     number = models.CharField(max_length=7)
     agency = models.CharField(max_length=4)
-    type = models.CharField(max_length=1, choices=ACCOUNT_TYPE)
     client = models.ForeignKey('users.User', on_delete=models.DO_NOTHING)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
         self.number = f"{randint(10000,99999)}-{randint(0,9)}" 
@@ -87,6 +79,7 @@ class Loan(models.Model):
     expiration = models.DateField()
     condition = models.CharField(max_length=1, choices=CONDITION, default=WAITING)
     account = models.ForeignKey(Account, related_name="Loan", on_delete=models.PROTECT)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Transaction(models.Model):
@@ -103,7 +96,7 @@ class LoanPayment(models.Model):
     due_date = models.DateTimeField(auto_now_add=True)
     payment_date = models.DateTimeField(auto_now_add=True)
     loan = models.ForeignKey(Loan, on_delete=models.PROTECT)
-
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class BankStatement(models.Model):
     ENTRIES = "E"
@@ -115,7 +108,9 @@ class BankStatement(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     type = models.CharField(max_length=1, choices=CONDITIONS)
     account = models.ForeignKey('users.User', on_delete=models.PROTECT)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class Deposit(models.Model):
     account = models.ForeignKey(Account, on_delete=models.DO_NOTHING, related_name="account")
     value = models.DecimalField(decimal_places=2, max_digits=10)
+    created_at = models.DateTimeField(auto_now_add=True)

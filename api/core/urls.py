@@ -11,5 +11,6 @@ router.register('accounts', views.Accounts, basename='accounts')
 router.register('trans', views.Transaction, basename='transaction')
 router.register('loan', views.Loan, basename='loan')
 router.register('lopayment', views.LoanPayment, basename='loanpayment')
+router.register('deposit', views.Deposit, basename='deposit')
 
 urlpatterns = router.urls

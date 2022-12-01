@@ -12,6 +12,10 @@ class AccountSerializer(serializers.ModelSerializer):
         model = Account
         fields = ('__all__')
 
+class DepositSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Deposit
+        fields = ('__all__')
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,8 +42,6 @@ class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = ('__all__')
-
-    
 
 class BankStateSerializer(serializers.ModelSerializer):
     class Meta:

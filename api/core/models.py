@@ -59,7 +59,6 @@ class Account(models.Model):
     client = models.ForeignKey('users.User', on_delete=models.DO_NOTHING)
 
     def save(self, *args, **kwargs):
-        self.balance = 0.00
         self.number = f"{randint(10000,99999)}-{randint(0,9)}" 
         self.agency = f"{randint(4000,9999)}"
 
@@ -116,3 +115,7 @@ class BankStatement(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     type = models.CharField(max_length=1, choices=CONDITIONS)
     account = models.ForeignKey('users.User', on_delete=models.PROTECT)
+
+class Deposit(models.Model):
+    account = models.ForeignKey(Account, on_delete=models.DO_NOTHING, related_name="account")
+    value = models.DecimalField(decimal_places=2, max_digits=10)

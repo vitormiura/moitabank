@@ -68,7 +68,7 @@ class Deposit(viewsets.ModelViewSet):
 
         acc.balance += decimal.Decimal(self.request.data['value'])
 
-        updateAccount = {'balance':acc.balance,'type':acc.type, 'number':acc.number,'agency':acc.agency,'client': acc.client.pk}
+        updateAccount = {'balance':acc.balance, 'number':acc.number,'agency':acc.agency,'client': acc.client.pk}
 
         serializerAcc = AccountSerializer(acc, data = updateAccount)
 

@@ -1,9 +1,11 @@
 
 import decimal
+from random import randint
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from .models import Card, Address, Contacts, Account, Loan, Transaction, BankStatement, LoanPayment
 from .serializers import CardSerializer, AddressSerializer, ContactsSerializer, AccountSerializer, LoanPaySerializer, LoanSerializer, TransactionSerializer, BankStateSerializer
+from users import models
 
 class Card(viewsets.ModelViewSet):
     queryset = Card.objects.all()
@@ -17,9 +19,6 @@ class Contacts(viewsets.ModelViewSet):
     queryset = Contacts.objects.all()
     serializer_class = ContactsSerializer
 
-class Accounts(viewsets.ModelViewSet):
-    queryset = Account.objects.all()
-    serializer_class = AccountSerializer
 
 class Loan(viewsets.ModelViewSet):
     queryset = Loan.objects.all()
@@ -29,6 +28,10 @@ class LoanPayment(viewsets.ModelViewSet):
     queryset = LoanPayment.objects.all()
     serializer_class = LoanPaySerializer
 
+class Accounts(viewsets.ModelViewSet):
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
+    
 class Transaction(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
@@ -54,7 +57,7 @@ class Transaction(viewsets.ModelViewSet):
         else:
             print(serializerSender.errors)
             print(sender.client)
-            return Response(status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_417_EXPECTATION_FAILED)
             
         
 

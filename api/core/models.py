@@ -1,5 +1,6 @@
 from django.db import models
 import users
+from random import randint
 
 class Card(models.Model):
     BLOCKED = "B"
@@ -13,7 +14,15 @@ class Card(models.Model):
     state = models.CharField(max_length=1, choices=STATE, default=ACTIVE)
     client = models.ForeignKey('users.User', on_delete=models.PROTECT)
 
+    def save(self, *args, **kwargs):
+        self.number = f"{randint(1000,9999)} {randint(1000,9999)} {randint(1000,9999)} {randint(1000,9999)}"
+        self.cvv = f"{randint(100,999)}"
+        self.expiration_date = f"{randint(1,12)}/{randint(27,32)}" 
 
+        super(Card, self).save(*args, **kwargs)
+    
+    def __str__(self) -> str:
+        return self.numero
 class Address(models.Model):
     country = models.CharField(max_length=55)
     state = models.CharField(max_length=55)
@@ -47,8 +56,17 @@ class Account(models.Model):
     number = models.CharField(max_length=7)
     agency = models.CharField(max_length=4)
     type = models.CharField(max_length=1, choices=ACCOUNT_TYPE)
-    client = models.ForeignKey('users.User', on_delete=models.PROTECT)
+    client = models.ForeignKey('users.User', on_delete=models.DO_NOTHING)
 
+    def save(self, *args, **kwargs):
+        self.balance = 0.00
+        self.number = f"{randint(10000,99999)}-{randint(0,9)}" 
+        self.agency = f"{randint(4000,9999)}"
+
+        super(Account, self).save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return self.number
 
 class Loan(models.Model):
     APPROVED = "A"
@@ -76,9 +94,9 @@ class Transaction(models.Model):
     value = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     recipient = models.ForeignKey(
-        Account, on_delete=models.PROTECT, related_name="recipient"
+        Account, on_delete=models.DO_NOTHING, related_name="recipient"
     )
-    sender = models.ForeignKey(Account, on_delete=models.PROTECT, related_name="sender")
+    sender = models.ForeignKey(Account, on_delete=models.DO_NOTHING, related_name="sender")
 
 
 class LoanPayment(models.Model):
@@ -94,7 +112,7 @@ class BankStatement(models.Model):
 
     CONDITIONS = [(ENTRIES, "Entries"), (WITHDRAWALS, "Withdrawals")]
 
-    value = models.DecimalField(decimal_places=2, max_digits=2)
+    value = models.DecimalField(decimal_places=2, max_digits=9)
     date = models.DateTimeField(auto_now_add=True)
     type = models.CharField(max_length=1, choices=CONDITIONS)
     account = models.ForeignKey('users.User', on_delete=models.PROTECT)

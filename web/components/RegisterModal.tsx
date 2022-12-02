@@ -15,7 +15,7 @@ export default function Register() {
 
   const submit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    await fetch("http://localhost:8000/auth/register", {
+    const res = await fetch("http://localhost:8000/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -28,9 +28,28 @@ export default function Register() {
         is_active: active,
         gender: gender,
       }),
-    });
-    await router.push("/login");
-  };
+    }).then(res => res.json());
+      await fetch("http://localhost:8000/bank/accounts/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          client: res.id,
+          balance: 0,
+          number: "a",
+          agency: "a"
+      })})
+      await fetch("http://localhost:8000/bank/card/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          client: res.id,
+          number: "a",
+          cvv: "a",
+          expiration_date: "a",
+          state: "A",
+      }) 
+  });
+}
   
   function handleCpf(e:any){
     const notFormattedCpf = e.target.value

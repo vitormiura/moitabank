@@ -160,7 +160,7 @@ const Deposit: NextPage = () => {
                     type="submit"
                     className="w-full cursor-pointer rounded-[4px] bg-green-700 px-3 py-[6px] text-center font-semibold text-white"
                   >
-                    Send Now!
+                    Deposit Now!
                   </button>
                 </div>
               </div>

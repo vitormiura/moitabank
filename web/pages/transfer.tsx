@@ -169,7 +169,7 @@ const Transfer: NextPage = () => {
                   <input
                     className="mt-1 w-full rounded-[4px] border border-[#A0ABBB] p-2"
                     type="text"
-                    placeholder="Account number with extra digit!"
+                    placeholder="Type the ID for now :("
                     onChange={(e) => setReci(parseInt(e.target.value))}
                   />
                 </div>

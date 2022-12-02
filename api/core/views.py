@@ -40,8 +40,8 @@ class Transaction(viewsets.ModelViewSet):
         recipiente = Account.objects.get(pk = self.request.data['recipient'])
         sender = Account.objects.get(pk = self.request.data['sender'])
 
-        recipiente.balance -= decimal.Decimal(self.request.data['value'])
-        sender.balance += decimal.Decimal(self.request.data['value'])
+        recipiente.balance += decimal.Decimal(self.request.data['value'])
+        sender.balance -= decimal.Decimal(self.request.data['value'])
 
         updateRecipient = {'balance':recipiente.balance, 'number':recipiente.number,'agency':recipiente.agency,'client': recipiente.client.pk}
 

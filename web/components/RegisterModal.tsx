@@ -31,6 +31,17 @@ export default function Register() {
     });
     await router.push("/login");
   };
+  
+  function handleCpf(e:any){
+    const notFormattedCpf = e.target.value
+
+    const formattedCpf = notFormattedCpf.replace(/\D/g, '')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1-$2')
+    .replace(/(-\d{2})\d+?$/, '$1')
+  setCpf(formattedCpf)
+  }
 
   return (
     <>
@@ -57,7 +68,8 @@ export default function Register() {
               id="cpf"
               type="text"
               placeholder="cpf"
-              onChange={(e) => setCpf(e.target.value)}
+              onChange={handleCpf}
+              value={cpf}
             />
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

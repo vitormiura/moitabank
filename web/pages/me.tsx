@@ -23,10 +23,11 @@ const Me: NextPage = () => {
           setAuth(false);
           setTimeout(async () => {
             await router.push("/login");
-          }, 1000);
+          }, 500);
         }
       } catch (e) {
         setAuth(false);
+        await router.push("/login");
         console.log(e);
       }
     })();

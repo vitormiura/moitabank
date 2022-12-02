@@ -28,6 +28,18 @@ const Login: NextPage = () => {
     await router.push("/client");
   };
 
+  function handleCpf(e: any) {
+    const notFormattedCpf = e.target.value;
+
+    const formattedCpf = notFormattedCpf
+      .replace(/\D/g, "")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1-$2")
+      .replace(/(-\d{2})\d+?$/, "$1");
+    setCpf(formattedCpf);
+  }
+
   return (
     <>
       <Layout>
@@ -57,7 +69,8 @@ const Login: NextPage = () => {
                               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                               id="exampleFormControlInputCPF"
                               placeholder="CPF"
-                              onChange={(e) => setCpf(e.target.value)}
+                              onChange={handleCpf}
+                              value={cpf}
                             />
                           </div>
                           <div className="mb-4">

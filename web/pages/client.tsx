@@ -32,6 +32,7 @@ export default function Client() {
         }
       } catch (e) {
         setAuth(false);
+        await router.push("/login");
         console.log(e);
       }
     })();

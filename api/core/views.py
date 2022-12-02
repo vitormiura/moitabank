@@ -43,9 +43,9 @@ class Transaction(viewsets.ModelViewSet):
         recipiente.balance -= decimal.Decimal(self.request.data['value'])
         sender.balance += decimal.Decimal(self.request.data['value'])
 
-        updateRecipient = {'balance':recipiente.balance, 'type':recipiente.type, 'number':recipiente.number,'agency':recipiente.agency,'client': recipiente.client.pk}
+        updateRecipient = {'balance':recipiente.balance, 'number':recipiente.number,'agency':recipiente.agency,'client': recipiente.client.pk}
 
-        updateSender = {'balance':sender.balance,'type':sender.type, 'number':sender.number,'agency':sender.agency,'client': sender.client.pk}
+        updateSender = {'balance':sender.balance, 'number':sender.number,'agency':sender.agency,'client': sender.client.pk}
 
         serializerSender = AccountSerializer(sender, data = updateSender)
         serializerRecipient = AccountSerializer(recipiente, data = updateRecipient)

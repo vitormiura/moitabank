@@ -1,8 +1,6 @@
 import { NextPage } from "next";
 import Layout from "../layouts/Layout";
 import { SyntheticEvent, useEffect, useState } from "react";
-import { isErrored } from "stream";
-import { userAgent } from "next/server";
 
 const Transfer: NextPage = () => {
   const [data, setData] = useState(Object);

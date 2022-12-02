@@ -41,7 +41,7 @@ const Layout = (props: any) => {
                 </div>
                 <div className="hidden md:block ">
                   <div className="ml-10 flex items-baseline space-x-4">
-                    <button className=" hover:bg-emerald-700 hover:text-white text-black px-3 py-2 rounded-md text-sm font-medium">
+                    <button className=" hover:bg-emerald-700 hover:text-white text-black px-3 py-2 rounded-md text-sm font-medium" onClick={() => router.push("/cards")}>
                       Cards
                     </button>
 
@@ -133,7 +133,7 @@ const Layout = (props: any) => {
             {(ref) => (
               <div className="md:hidden" id="mobile-menu">
                 <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                  <button className="hover:bg-gray-700 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                  <button className="hover:bg-gray-700 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium" onClick={() => router.push("/cards")}>
                     Cards
                   </button>
 

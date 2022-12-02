@@ -1,15 +1,14 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import Layout from "../layouts/Layout";
 import { SyntheticEvent, useEffect, useState } from "react";
+import Layout from "../layouts/Layout";
 
-const Transfer: NextPage = () => {
+const Deposit: NextPage = () => {
   const router = useRouter();
   const [data, setData] = useState(Object);
   const [auth, setAuth] = useState(false);
   const [user, setUser] = useState(Object);
   const [value, setValue] = useState(0);
-  const [recipient, setReci] = useState(Number);
 
   useEffect(() => {
     (async () => {
@@ -24,6 +23,7 @@ const Transfer: NextPage = () => {
         setTimeout(() => {
           acc(user.id);
         }, 250);
+
         if (user.detail == "Unauthenticated!") {
           setAuth(false);
           setTimeout(async () => {
@@ -52,13 +52,12 @@ const Transfer: NextPage = () => {
 
   const submit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    await fetch("http://localhost:8000/bank/trans/", {
+    await fetch("http://localhost:8000/bank/deposit/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         value: value,
-        recipient: recipient,
-        sender: user.id,
+        account: user.id,
       }),
     });
   };
@@ -68,14 +67,14 @@ const Transfer: NextPage = () => {
       <Layout auth={auth}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-screen">
           <h1 className="text-black text-center pt-6 pb-0 font-bold text-4xl">
-            Hey {user.name}, transfer to others ASAP!
+            Hey {user.name}, deposit to your account ASAP!
           </h1>
           <form onSubmit={submit}>
             <div className="font-manrope flex h-[40rem] w-full items-center justify-center">
               <div className="mx-auto box-border w-[365px] border bg-white p-4">
                 <div className="flex items-center justify-between">
                   <span className="text-[#64748B]">
-                    Transfer to another account!
+                    Deposit to your account!
                   </span>
                   <div className="cursor-pointer border rounded-[4px]">
                     <svg
@@ -97,7 +96,7 @@ const Transfer: NextPage = () => {
 
                 <div className="mt-6">
                   <div className="font-semibold">
-                    How much would you like to send?
+                    How much would you like to deposit?
                   </div>
                   <div>
                     <input
@@ -133,45 +132,27 @@ const Transfer: NextPage = () => {
                         </svg>
                         <span className="font-semibold">{user.name}</span>
                       </div>
-
-                      <div className="flex items-center gap-x-2">
-                        <div className="text-[#64748B]">{data.number}</div>
-                      </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="mt-6">
-                  <div className="flex justify-between">
-                    <span className="font-semibold text-[#191D23]">
-                      Receiving
-                    </span>
-                    <div className="flex cursor-pointer items-center gap-x-2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-green-700"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                      <div className="font-semibold text-green-700">
-                        Add recipient
+                  <div className="font-semibold">Account</div>
+                  <div className="mt-2">
+                    <div className="flex w-full items-center justify-between bg-neutral-100 p-3 rounded-[4px]">
+                      <div className="flex items-center gap-x-2">
+                        <span className="font-semibold">
+                          Number: {data.number}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-x-2">
+                        <div className="text-[#64748B]">
+                          Agency: {data.agency}
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <input
-                    className="mt-1 w-full rounded-[4px] border border-[#A0ABBB] p-2"
-                    type="text"
-                    placeholder="Account number with extra digit!"
-                    onChange={(e) => setReci(parseInt(e.target.value))}
-                  />
                 </div>
 
                 <div className="mt-6">
@@ -191,4 +172,4 @@ const Transfer: NextPage = () => {
   );
 };
 
-export default Transfer;
+export default Deposit;

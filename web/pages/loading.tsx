@@ -11,7 +11,7 @@ const Final: NextPage = () => {
           Loading...
         </h2>
         <p className="w-1/3 text-center text-white">
-          This may take a few seconds, please don't close this page.
+          This may take a few seconds, please do not close this page.
         </p>
       </div>
     </>

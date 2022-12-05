@@ -19,7 +19,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'users',
-    'core'
+    'core',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -89,3 +90,8 @@ AUTH_USER_MODEL = 'users.User'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
